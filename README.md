@@ -42,7 +42,7 @@ For generating random domain, utilize two scripts
 
 ```bash
 # before running the script, make sure you setup the openai api key here!
-export OPENAI_API_KEY="<your-openai-api-key"
+export OPENAI_API_KEY="<your-openai-api-key>"
 
 python sample_madlib_op.py # for generating random domain for object placements task.
 python sample_madlib_ta.py # for generating random domain for team allocation task.
@@ -54,7 +54,7 @@ For generating data instances, utilize three scripts
 
 ```bash
 # before running the script, make sure you setup the openai api key here!
-export OPENAI_API_KEY="<your-openai-api-key"
+export OPENAI_API_KEY="<your-openai-api-key>"
 
 bash create_mm.sh # for generating murder mysteries data
 bash create_op.sh # for generating object placements data
@@ -69,4 +69,4 @@ We provide evaluation example in `evaluation.sh` script that utilizes local infe
 
 ## License
 
-This repository is licensed under MIT license. For the original code, see [MuSR Repository](https://github.com/Zayne-sprague/MuSR)
+This repository is licensed under MIT license. For the original code, see [MuSR Repository](https://github.com/Zayne-sprague/MuSR).
