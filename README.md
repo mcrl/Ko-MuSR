@@ -69,4 +69,4 @@ We provide evaluation example in `evaluation.sh` script that utilizes local infe
 
 ## License
 
-This repository is licensed under MIT license. For original code, see [MuSR Repository](https://github.com/Zayne-sprague/MuSR)
+This repository is licensed under MIT license. For the original code, see [MuSR Repository](https://github.com/Zayne-sprague/MuSR)
