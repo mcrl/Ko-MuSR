@@ -1,0 +1,331 @@
+task: en_musr_v3_op_cot_nohint
+dataset_path: TAUR-Lab/MuSR
+description: 'You are a helpful assistant that will answer the questions given by
+  the user.
+
+
+  Here is an example of solving the task:
+
+
+  '
+doc_to_text: !function 'utils.doc_to_text_op_cot_nohint'
+doc_to_target: !function 'utils.doc_to_target'
+output_type: generate_until
+generation_kwargs:
+  do_sample: false
+  until:
+  - 'Q:'
+  - </s>
+  - <|im_end|>
+  - '
+
+
+
+    '
+process_results: !function 'utils.process_results'
+metric_list:
+- metric: acc
+  aggregation: mean
+num_fewshot: 3
+fewshot_delimiter: '
+
+
+
+  '
+fewshot_config:
+  sampler: first_n
+  samples:
+  - narrative: "Petra, the dedicated housewife, felt a thrill at the thought of her\
+      \ surprise anniversary dinner for her husband, Daniel. She had been skillfully\
+      \ maneuvering around Daniel's eagerness to pitch in without disappointing him\
+      \ or giving up her surprise. \n\nDaniel, ever-the-observant-husband, noted Petra's\
+      \ unusual enthusiasm about the day's menu. Despite not knowing the details,\
+      \ he appreciated her effort and wanted to help—silently, he decided to deploy\
+      \ his best skill—patiently awaiting his moment to help, maybe when Petra asked\
+      \ for something from the pantry. Amidst the excitement, there was Clara, their\
+      \ maid—ever diligent and efficient, trying to keep the surroundings perfect\
+      \ for this special evening. \n\nTucked away, under the counter, was Petra's\
+      \ secret recipe book, her culinary treasure. Her solace in confusing times,\
+      \ her secret weapon during their flavorful adventures. While toward the back\
+      \ of the pantry, was the glass jar of Petra's favorite spice blends—something\
+      \ that Daniel was well aware of, in case an opportunity arose for him to assist\
+      \ or distract when Petra might need it. \n\nAll three residents of the home\
+      \ were aware of each item's location. The secret recipe book under the counter,\
+      \ the glass jar in the pantry, and the anxious excitement that filled the air—a\
+      \ fragrance even more intoxicating than the delicious smells that would soon\
+      \ fill the kitchen.\n\nWith tact and secrecy, Petra relocated her cherished\
+      \ recipe book from its hidden spot under the counter to its temporary home on\
+      \ the kitchen table. The pages were swiftly opened to reveal her secret recipes\
+      \ which she was eager to start preparing for the long-awaited anniversary surprise.\
+      \ While Petra was engrossed in her preparations, Clara continued her sweeping\
+      \ routine in the kitchen. Clara's steady broom strokes on the wooden floor echoed\
+      \ a little in the otherwise busy and humming kitchen. In the background, beyond\
+      \ the kitchen door, Daniel could be seen in the dining room, meticulously setting\
+      \ the table for the anticipated special dinner.\n\nThe placement of the rooms\
+      \ allowed Clara to easily notice Petra's movements in her peripheral vision\
+      \ while she was executing her chores. Every move Petra made was observed in\
+      \ Clara's line of sight. Simultaneously, separated by the walls, Daniel was\
+      \ diligently arranging the tableware in the dining room which was separate from\
+      \ Petra's bustling kitchen.\n\nHoping to spruce up the setting, Daniel delicately\
+      \ relocated a glass jar filled with decorative pebbles to the center of the\
+      \ dining table. His subtle contribution for the evening - a perfectly presentable\
+      \ table for their special anniversary dinner. Amidst the flurry of the special\
+      \ day's preparations, Clara diligently carried on with her duties in the upstairs\
+      \ bathroom, unseen from the dining room. Meanwhile, Petra was wholly engrossed\
+      \ in the allure of a new recipe in her cherished, hidden book which lay opened\
+      \ on the kitchen island, away from prying eyes of the dining room.\n\nIn the\
+      \ middle of her usual tidying, Clara spotted Petra's treasured recipe book on\
+      \ the kitchen table. Ensuring it stayed clandestine, Clara carefully transferred\
+      \ it back to its usual hideaway spot beneath the counter. In the midst of the\
+      \ anniversary excitement, Clara deftly transferred Petra's secret weapon back\
+      \ to its hiding place when Daniel stepped out into the garage to retrieve extra\
+      \ utensils. Performing her duty with a sense of urgency, she made sure to move\
+      \ quietly to not disturb Petra, who was engrossed in the process of boiling\
+      \ a massive pot of pasta water on the stove.\n\nDespite the commotion and fervor\
+      \ in the kitchen, the hubbub did not stretch as far as the garage, which remained\
+      \ undisturbed by the domestic activity occurring in the main part of the house.\
+      \ Meanwhile, in the kitchen, Petra was oblivious to Clara's subtle maneuver\
+      \ while she busied herself at the stove, focussed on making sure the large pot\
+      \ of water reached the perfect boil.\n\nIn the end, the careful orchestration\
+      \ of duties by each individual within the house concluded in a harmonious anniversary\
+      \ celebration. The marks of a successful evening consisted of a delectable meal,\
+      \ a serene atmosphere, and the memory of a smooth, incident-free evening where\
+      \ everyone played their role to perfection.\n"
+    question: Which location is the most likely place Clara would look to find the
+      glass jar given the story?
+    choices:
+    - piano
+    - producer's desk
+    - recording booth
+    reasoning: 'Let''s solve this by thinking step-by-step. We want to know where
+      Clara will check to find the glass jar, so let''s track where Clara sees the
+      glass jar throughout the story.
+
+
+      At the beginning of the story, it is stated that "All three residents of the
+      home were aware of each item''s location... the glass jar in the pantry." From
+      this, we can conclude that the first place in the story where Clara sees the
+      glass jar is in the pantry.
+
+
+      Throughout the story, the glass jar only moves once to the dining table. However,
+      while Daniel was moving the glass jar, Clara was upstairs in the restroom carrying
+      out her duties. It''s highly unlikely that she saw Daniel move the glass jar,
+      so we can assume that she still believes it to be in the pantry.
+
+
+      Clara does go to the kitchen in the story and moves a recipe book from the kitchen
+      table, but because it''s the kitchen table and not the dining room table, we
+      can assume she hasn''t seen the glass jar there.
+
+
+      Now, given the story and evidence, we can assume that Clara believes the glass
+      jar to be in the pantry.
+
+
+      ANSWER: 3
+
+      '
+  - narrative: "Samantha, the celebrated concert pianist, had her sheet music scattered\
+      \ on the stand, a necessary mess for her anticipated performance. Benjamin was\
+      \ hard at work, as biasing the acoustics for the perfect sound was a duty he\
+      \ took very seriously indeed. Maria, the stage manager, was the invisible force\
+      \ ensuring everything ran smoothly, her job a series of seemingly infinite tasks\
+      \ which ultimately contributed to a professionally done event.\n\nOn her stand,\
+      \ Samantha's sheet music danced through her vision. Notes, bars, and clefs forming\
+      \ the symphony that would soon fill the auditorium. As she rehearsed, Benjamin,\
+      \ the skilled sound technician, was deeply involved in his own preparations.\
+      \ He diligently fine-tuned the audio equipment to capture the nuances of Samantha's\
+      \ performance. His motivation was heightened by the looming reality of the concert.\
+      \ \n\nMaria, the efficient stage manager was aware of every minute detail of\
+      \ the event. From the sheet music at the stand to the microphone safely tucked\
+      \ away in the storage room waiting for use, Maria had ensured that. She barely\
+      \ missed a beat while coordinating their magnificent symphony behind the scenes.\
+      \ They were all aware of each other's part in this grand performance, from the\
+      \ musician to the sound technician and the stage manager, they knew how integral\
+      \ they each were to the success of the show. Each item, each person, and every\
+      \ location, they had knowledge of, a testament to their dedication and synergy.\n\
+      \nIn a fully rehearsed motion, Samantha swept her dispersed sheet music into\
+      \ her bag. With the anticipation of the grand concert looming, she intended\
+      \ to review them one final time, ensuring the evening would unfold as melodiously\
+      \ as planned. Simultaneously, Benjamin, the apt sound technician, was at the\
+      \ back of the auditorium, meticulously adjusting the sound system. The task\
+      \ required a musician's ear and a technician's precision, a combination that\
+      \ Benjamin possessed, geared towards ensuring the perfect sound for the evening.\n\
+      \nIn parallel, Maria, the assured stage manager, was diligently monitoring Samantha's\
+      \ preparatory activities from a distance, her eyes snapping back and forth as\
+      \ Samantha continued with her rehearsal.\n\nSamantha's actions appeared rhythmic\
+      \ and harmonious to Maria, who, from her position, had a direct and uninterrupted\
+      \ view of Samantha at the grand piano. The sight was breathtaking yet nerve-wracking,\
+      \ a feeling Maria was accustomed to before every grand concert.\n\nWhile Samantha\
+      \ was busy on the grand stage, Benjamin's endeavours took place significantly\
+      \ further away from where Samantha was present. A distance which, rather than\
+      \ prevent, allowed for the perfect balance in blending Samantha's enchanting\
+      \ music with the auditorium's acoustics perfectly.\n\nMaria, ever-efficient,\
+      \ meticulously arranged the scattered sheet music back onto the stand, preparing\
+      \ for Samantha's grand performance and ensuring everything was in its rightful\
+      \ place. While the air buzzed with excitement for the imminent concert, Samantha\
+      \ had retreated to a quiet further corner for a moment of solitude. Her eyes\
+      \ were securely shut, as was her practice during such meditative moments. This\
+      \ solitude served as a temporary escape from the pressing rehearsal preparations,\
+      \ a solace she often sought out before her performances.\n\nA short distance\
+      \ away from Samantha's corner was Benjamin, engrossed in his intense calibration\
+      \ of the sound equipment. The proximity to the performers' area was strategic,\
+      \ enabling him to adjust the acoustics to perfection. Benjamin's work was critical,\
+      \ his every move a direct influence on the sound that would fill the auditorium\
+      \ during the concert.\n\nAdjacent to the bustling activity of the performers'\
+      \ area, Maria maintained a watchful eye from her own corner. From her vantage\
+      \ point, she had a clear overview of the entire setup. Maria's role was critical\
+      \ to ensuring that nothing got overlooked and that everything ran as smoothly\
+      \ as possible during the concert.\n\nBenjamin, keeping every detail in mind,\
+      \ moved the microphone to its rightful place center stage, thus taking a step\
+      \ further in perfecting the night's acoustics for Samantha's performance. As\
+      \ the fervor of preparation carried on, Maria was seen professionally navigating\
+      \ through the chaos of the backstage. Engrossed in coordination with the lighting\
+      \ crew, she was vital in orchestrating the unseen aspects of the performance.\
+      \ Meanwhile, Samantha was secluded in the backstage practice room, her strokes\
+      \ echoing the mellifluous tunes soon to fill the auditorium. The location of\
+      \ her isolated practice area was deliberately separate, providing her with the\
+      \ privacy needed to immerse herself in her music.\n\nUnfazed by the flurry of\
+      \ activity around them, the lighting crew maintained their station, diligently\
+      \ operating the illuminating technology that would enhance the visual aspect\
+      \ of the night's performance. Their setting, however, was quite removed from\
+      \ the nexus of the audio setup and stage, a purposeful choice that allowed for\
+      \ independent adjustments and impeccable timing.\n\nWhilst the grand preparations\
+      \ were underway, the view from the practice room didn't offer Samantha a direct\
+      \ eye on the stage. Nevertheless, the pianist carried on confidently, her focus\
+      \ solely on delivering a remarkable performance. Eager anticipation and conducive\
+      \ preparation seamlessly blended together to mark the end of a day that would\
+      \ be remembered for a soulful evening of music.\n"
+    question: Which location is the most likely place Benjamin would look to find
+      the sheet music given the story?
+    choices:
+    - Bag
+    - Concert hall stage
+    - Stand
+    - Storage room
+    reasoning: 'Let''s solve this by thinking step-by-step. We want to know where
+      Benjamin will check to find the sheet music, so let''s track where Benjamin
+      sees the sheet music throughout the story.
+
+
+      At the beginning of the story, it is stated that "They were all aware of each
+      other''s part in this grand performance... Each item, each person, and every
+      location, they had knowledge of, a testament to their dedication and synergy."
+      From this, we can conclude that Benjamin initially knows the sheet music is
+      on the stand.
+
+
+      The sheet music moves twice in the story. First, Samantha moves it from the
+      stand to her bag. However, when this happens, Benjamin was "at the back of the
+      auditorium, meticulously adjusting the sound system" and was "significantly
+      further away from where Samantha was present." This distance means Benjamin
+      would not have observed Samantha moving the sheet music to her bag.
+
+
+      Later, Maria moves the sheet music back from the bag to the stand. During this
+      time, Benjamin was "engrossed in his intense calibration of the sound equipment"
+      but was "a short distance away from Samantha''s corner" and "adjacent to the
+      bustling activity of the performers'' area." Since Benjamin was nearby and Maria
+      had "a clear overview of the entire setup" from her position, it''s reasonable
+      that Benjamin could observe Maria''s action of moving the sheet music back to
+      the stand.
+
+
+      Given that Benjamin likely missed the first move (stand to bag) but could observe
+      the second move (bag back to stand), Benjamin would believe the sheet music
+      is on the stand.
+
+
+      ANSWER: 3
+
+      '
+  - narrative: "It was a frantic day in the office. Greg, the IT specialist, was in\
+      \ a race against time, quiet determination etched on his face. Jenna, the accounting\
+      \ manager, was feeling the pressure, her critical report hanging in the balance\
+      \ without access to her financial data. Tom, the eager intern, keen on impressing,\
+      \ stood by ready to aid in any way he could.\n\nThey were all acutely aware\
+      \ that the hard drive, crucial to the whole process, was tucked away in the\
+      \ storage closet. Jenna's office was where the reasonably organised backup tapes\
+      \ remained, an invaluable resource in moments like these.\n\nSwiftly yet cautiously,\
+      \ Greg moved the hard drive from the storage closet to the server room. His\
+      \ silent determination echoed around him as he navigated the corridor, knowing\
+      \ the entire company's stability hinged on this hard drive. Greg's determined\
+      \ figure was caught in Tom's gaze as he moved swiftly yet cautiously through\
+      \ the office corridor. Meanwhile, Jenna, situated in another room, was engrossed\
+      \ in a video conference with a potential client, the view from her webcam focused\
+      \ on the contents displayed on her computer screen. Tom followed Greg around\
+      \ the office, trailing closely, taking in every step of the process keenly.\n\
+      \nWith a sigh of relief, Jenna gently placed the backup tapes in their rightful\
+      \ place in the storage closet. Her desk, now clear, was ready to tackle the\
+      \ flurry of data analysis once the server was restored. In the midst of seemingly\
+      \ insurmountable challenges, Greg was the epitome of focused diligence, engrossed\
+      \ in the intricate world of code. Efforts to restore the critical server were\
+      \ intense but steady. His screen illuminated the room and reflected in his glasses\
+      \ as he worked. On the other end of the room, Jenna, her worry palpable, maintained\
+      \ a respectful silence, careful not to break Greg's concentration. Her shear\
+      \ professionalism and concern for the success of the day's endeavors hung in\
+      \ the air around her.\n\nThen there was Tom, the intern. His eaguristic energy\
+      \ was apparent as he comforted the nervous office air. With his undoubted talent\
+      \ and enthusiasm, he was already navigating the company's supply catalogue online,\
+      \ ordering what Greg needed for the task at hand. The pace of his fingers on\
+      \ the keyboard matched the overall urgency of the situation, illustrating both\
+      \ his commitment and understanding of the importance of the task.\n\nIn a moment\
+      \ of quick thinking, Tom scooped up the newly restored hard drive and maneuvered\
+      \ it to Greg's work desk. As he set it down, a palpable sense of purpose surrounded\
+      \ him, his eager determination to assist seemingly transforming the frantic\
+      \ office atmosphere. Amidst the strained atmosphere, Greg was hunched over a\
+      \ manual, his interest deeply absorbed in steps meant for an entirely different\
+      \ device restoration, his mind applying the principles to their current dilemma.\
+      \ A silent intensity filled the room as his focus zeroed in on extracting relevant\
+      \ knowledge from the manual, oblivious to anything else.\n\nAcross the partition,\
+      \ Jenna was utterly immersed in financial reports. The ticking of the clock\
+      \ became mere background noise as her eyes focused on the minute details, desperate\
+      \ to salvage what she could in the interim. Her desk, which usually buzzed with\
+      \ activity, was in a separate location, isolated by a divider, as if echoing\
+      \ her desperate solitude in the face of the crisis at hand.\n\nIn the end, the\
+      \ intrinsic dedication exhibited by each member of the team kept the pervasive\
+      \ tension from overwhelming the task at hand. They individually epitomized the\
+      \ determination and tenacity necessary when met with unexpected challenges.\
+      \ In a potent mix of technical skill, managerial expertise, and eager assistance,\
+      \ the firm faced their crisis head-on, and demonstrated the resilience matching\
+      \ the standards of the industry.\n    \n"
+    question: Which location is the most likely place Greg would look to find the
+      backup tapes given the story?
+    choices:
+    - Greg's work desk
+    - Jenna's office
+    - server room
+    - storage closet
+    reasoning: 'Let''s solve this by thinking step-by-step. We want to know where
+      Greg will check to find the backup tapes, so let''s track where Greg sees the
+      backup tapes throughout the story.
+
+
+      At the beginning of the story, it is stated that "Jenna''s office was where
+      the reasonably organised backup tapes remained, an invaluable resource in moments
+      like these." From this, we can conclude that Greg initially knows the backup
+      tapes are in Jenna''s office.
+
+
+      The backup tapes move once in the story. Jenna moves them from her office to
+      the storage closet. However, when this happens, Greg was focused on his own
+      work - he was "engrossed in the intricate world of code" with "efforts to restore
+      the critical server" being "intense but steady." The story specifically mentions
+      that Greg''s "screen illuminated the room and reflected in his glasses as he
+      worked," indicating he was deeply focused on his computer work.
+
+
+      While Jenna was moving the backup tapes, the story states that "Jenna, her worry
+      palpable, maintained a respectful silence, careful not to break Greg''s concentration."
+      This suggests that Jenna was being deliberately quiet and unobtrusive to avoid
+      disturbing Greg, making it even less likely that Greg would notice her moving
+      the backup tapes.
+
+
+      Now, given the story and evidence, we can asume that Greg believe the backup
+      tapes are still in Jenna''s office.
+
+
+      ANSWER: 2'
+test_split: object_placements

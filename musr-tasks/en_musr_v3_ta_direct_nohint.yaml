@@ -1,0 +1,388 @@
+task: en_musr_v3_ta_direct_nohint
+dataset_path: TAUR-Lab/MuSR
+description: 'You are a helpful assistant that will answer the questions given by
+  the user.
+
+
+  Here is an example of solving the task:
+
+
+  '
+doc_to_text: !function 'utils.doc_to_text_ta_direct_nohint'
+doc_to_target: !function 'utils.doc_to_target'
+output_type: generate_until
+generation_kwargs:
+  do_sample: false
+  until:
+  - 'Q:'
+  - </s>
+  - <|im_end|>
+  - '
+
+
+
+    '
+process_results: !function 'utils.process_results'
+metric_list:
+- metric: acc
+  aggregation: mean
+num_fewshot: 3
+fewshot_delimiter: '
+
+
+
+  '
+fewshot_config:
+  sampler: first_n
+  samples:
+  - narrative: 'In the quaint community of Midvale, the local school stood as a beacon
+      of enlightenment, nurturing the minds of the next generation. The teachers,
+      the lifeblood of this institution, were tasked with the noble duty of education,
+      while the unsung heroes—the maintenance crew—ensured the smooth functioning
+      of the school''s infrastructure. Amidst this, three town residents, Angela,
+      Greg, and Travis, found themselves at a juncture of life where they were presented
+      with the opportunity to serve in one of these crucial roles. The challenge now
+      lay in the hands of the manager, who had to assign them to either teaching or
+      maintenance, a decision that would set the course for their contributions to
+      the school.
+
+
+      Angela was a fiercely independent woman, beset with a unique set of strengths
+      and weaknesses. She was a woman of very few words, often finding it hard to
+      articulate her thoughts and explain things clearly. Venturing into education
+      seemed a maze with her apathetic attitude towards learning. She was also seen
+      to be disinterested in reading and the literary field as a whole. This was a
+      juxtaposition to her inability to contribute to maintenance duties because of
+      her fear of tools and machinery, a sinister remnant of a past accident that
+      still haunted her. The basic handyman skills, which most locals learned growing
+      up, were also absent from her repertoire.
+
+
+      Angela''s interactions with Greg and Travis further complicated the equation.
+      On one hand, Greg and Angela had a habit of arguing constantly over trivial
+      matters, which once culminated in their failure to complete a shared basic training
+      exercise adequately. On the other hand, Angela and Travis simply had nothing
+      in common. Their conversations were often fraught with awkward silences, indicative
+      of their lack of shared interests. This lack of coordination was epitomized
+      during a recent team-building exercise when their team finished last.
+
+
+      Greg was the blue-collar type with a broad frame and muscular build. He had
+      a work ethic that never shied away from toiling through the day to get things
+      done. Growing up, he often helped his father with simple home repairs and minor
+      renovations, learning the ropes of basic handiwork. Additionally, Greg had fortified
+      his skills while refurbishing an old shed with Travis, a testament to their
+      compatible personalities. However, his dislike for education was well known
+      throughout town, further amplified by his lack of patience, especially with
+      children.
+
+
+      Travis, the third cog in the wheel, was a man of many peculiarities. His stage
+      fright was almost legendary and made it nearly impossible for him to stand in
+      front of a crowd. Often, the mere thought of it could unnerve him. His physical
+      constitution was lightweight and fragile, and long hours of manual labor made
+      him weary. He also had a revulsion towards dirt that he complained about at
+      every opportune moment. Like the others, studying did not appeal to him much,
+      so much so that he had stopped reading completely after leaving school prematurely.
+
+
+      The manager understood well that a team’s success depends heavily on the contribution
+      and compatibility of each member. He observed, analyzed, and considered. Now,
+      it was up to him to assign roles to Angela, Greg, and Travis. The school needed
+      educators and maintenance staff, and each had to play their part perfectly.
+
+      '
+    question: Given the story, how would you uniquely allocate each person to make
+      sure both tasks are accomplished efficiently?
+    choices:
+    - 'Teaching: Travis, Maintenance: Angela and Greg'
+    - 'Teaching: Greg, Maintenance: Angela and Travis'
+    - 'Teaching: Angela, Maintenance: Greg and Travis'
+    reasoning: "Let's solve this by thinking step-by-step. First, we will figure out\
+      \ each person's skill level for each task. Then, we can measure how well they\
+      \ all work together in pairs. From this, we can find the most efficient assignment\
+      \ that maximizes the scores.\n\nLet's start with Angela. Angela can't articulate\
+      \ her thoughts, and she seems unprepared for teaching. So, let's assume her\
+      \ skill level is 1 for teaching. She also is bad at maintenance due to her fear\
+      \ of maintenance. So, let's assume her skill level is 1 for maintenance as well.\n\
+      \nNow, let's look at Greg. Greg has a dislike for education and a lack of patience,\
+      \ so let's assume his skill level for maintenance is 1. However, Greg has helped\
+      \ with home repairs and minor renovations, so let's assume his maintenance skill\
+      \ level is 2.\n\nFinally, let's look at Travis. Travis has extreme stage fright,\
+      \ which will make it difficult to teach, so let's assume his teaching skill\
+      \ level is 1. He also has a lightweight and fragile frame as well as hates dirt,\
+      \ so let's assume his maintenance skill level is 1.\n\nNow, let's look at the\
+      \ relationships and how people work together.\n\nAngela and Greg do not get\
+      \ along; they are constantly arguing, so let's assume their ability to work\
+      \ together is 1.\n\nAngela and Travis aren't much better. They both have nothing\
+      \ in common, and they couldn't do a team-building exercise previously, so let's\
+      \ assume their ability to work together is 1.\n\nFinally, Greg and Travis have\
+      \ worked together, and their personalities seem to meld, so let's assume they\
+      \ work well together with a score of 3.\n\nLet's summarize and figure out the\
+      \ best assignment.\n\nAngela is bad at teaching. (1)\nAngela is bad at maintenance.\
+      \ (1)\nAngela does not work well with Greg. (1)\nAngela does not work well with\
+      \ Travis. (1)\nGreg is bad at teaching. (1) \nGreg is okay with maintenance.\
+      \ (2)\nGreg and Travis work well together. (3)\nTravis is bad at teaching. (1)\n\
+      Travis is bad at maintenance. (1)\n\nNow, let's find the best assignment.\n\n\
+      Option 1: Travis as a teacher (1) + Angela working in maintenance (1) + Greg\
+      \ working in maintenance (2) + Angela and Greg work badly together (1) = 5\n\
+      Option 2: Greg as a teacher (1) + Angela working in maintenance (1) + Travis\
+      \ working in maintenance (1) + Angela and Travis work badly toghether (1) =\
+      \ 4\nOption 3: Angela as a teacher (1) + Greg working in maintenance (2) + Travis\
+      \ working in maintenance (1) + Greg and Travis work well together (3) = 7\n\n\
+      So, from this, we can see Option 3 has the maximum score.\n\nANSWER: 3\n"
+  - narrative: "Amidst the pulsating energy of NASA's headquarters, the team manager\
+      \ sat, surrounded by the hum of diligent scientists and engineers. Before him\
+      \ stood three exceptional individuals: Eliza, Manuel, and Sophie - each a unique\
+      \ blend of talents and flaws that he was tasked to navigate. The challenge was\
+      \ as daunting as it was clear: to assign each to a role that would further unravel\
+      \ the mysteries of Mars. The question remained, who would don the suit of an\
+      \ astronaut and who would delve into the realm of science?\n\nEliza was an enigma\
+      \ of her own right. Her synergy with Manuel was undeniable, her industrious\
+      \ nature twinned with his – they both frequently stayed behind to perfect their\
+      \ crafts, complimenting each other's skills in a remarkable yin-yang fashion.\
+      \ However, throw scientific procedures in the mix and Eliza's stress compass\
+      \ spiralled out of control. \n\nInterestingly enough, the trials, designed to\
+      \ instigate stress, formed her playground. She slipped through both physical\
+      \ and psychological testing procedures meant for astronauts. On top, her exceptional\
+      \ problem-solving skills and resilience, both honed during her tenure at the\
+      \ International Space Station, had earned her a parade of accolades. There were,\
+      \ however, sour notes in this otherwise harmonious melody. Eliza preferred to\
+      \ work alone and had a tough time understanding complex scientific theories.\
+      \ Plus, her history with Sophie created a disturbance in their harmony.\n\n\
+      Our second candidate, Manuel, was a walking paradox. He held a firm grasp over\
+      \ scientific concepts, fostered by his degree in physics and his insatiable\
+      \ curiosity for science. Paired with Sophie, their companionship translated\
+      \ into successful collaborations on past projects. However, astronaut training,\
+      \ a demanding mix of physical trials and zero gravity sessions, quickly drained\
+      \ his endurance. His severe motion sickness, amplified in the weightless expanse\
+      \ of space, further chiseled his path away from the astronaut role. \n\nLastly,\
+      \ we had Sophie. Her fear of closed spaces and her heart condition made space\
+      \ travels a danger to her health. She, too, had her battles with scientific\
+      \ tasks due to her habit of making assumptions and struggling with complex calculations.\
+      \ Additionally, the tension between her and Eliza could rattle the team dynamics.\
+      \ Regardless of these drawbacks, Sophie's affinity towards collaboration, paired\
+      \ with Manuel's camaraderie, had previously proven to be the fuel to scientific\
+      \ successes. \n\nAs the countdown to the Mars mission approached, the rhythmic\
+      \ hum of thoughts in the room grew louder. Assignments had to be made. Their\
+      \ manager peered at each one of them knowing their strengths and weaknesses,\
+      \ the intricate dynamics of relationships and past engagements. He knew that\
+      \ the success of this interstellar endeavour hinged upon these decisions. This\
+      \ was his puzzle to solve – a puzzle of human constraints and Martian dreams.\n"
+    question: Given the story, how would you uniquely allocate each person to make
+      sure both tasks are accomplished efficiently?
+    choices:
+    - 'Astronaut: Sophie, Scientist: Eliza and Manuel'
+    - 'Astronaut: Eliza, Scientist: Manuel and Sophie'
+    - 'Astronaut: Manuel, Scientist: Eliza and Sophie'
+    reasoning: 'Let''s solve this by thinking step-by-step. First, we will figure
+      out each person''s skill level for each task. Then, we can measure how well
+      they all work together in pairs. From this, we can find the most efficient assignment
+      that maximizes the scores.
+
+
+      Let''s start with Eliza. Eliza excels at astronaut trials and has ISS experience
+      with exceptional problem-solving skills, so let''s assume her astronaut skill
+      level is 3. However, she struggles with scientific procedures and has trouble
+      understanding complex scientific theories, so let''s assume her science skill
+      level is 1.
+
+
+      Now, let''s look at Manuel. Manuel has severe motion sickness in space and poor
+      endurance for astronaut training, so let''s assume his astronaut skill level
+      is 1. However, he has a physics degree and firm grasp of scientific concepts,
+      so let''s assume his science skill level is 3.
+
+
+      Finally, let''s look at Sophie. Sophie has a fear of closed spaces and heart
+      condition making space travel dangerous, so let''s assume her astronaut skill
+      level is 1. She struggles with scientific calculations and makes assumptions,
+      so let''s assume her science skill level is 1.
+
+
+      Now, let''s look at the relationships and how people work together.
+
+
+      Eliza and Manuel have undeniable synergy and complement each other''s skills,
+      so let''s assume their ability to work together is 3.
+
+
+      Eliza and Sophie have a history that creates disturbance in their harmony, so
+      let''s assume their ability to work together is 1.
+
+
+      Manuel and Sophie have successful past collaborations and good companionship,
+      so let''s assume their ability to work together is 3.
+
+
+      Let''s summarize and figure out the best assignment.
+
+
+      Eliza is great at astronaut work. (3)
+
+      Eliza is bad at science. (1)
+
+      Eliza works well with Manuel. (3)
+
+      Eliza does not work well with Sophie. (1)
+
+      Manuel is bad at astronaut work. (1)
+
+      Manuel is great at science. (3)
+
+      Manuel works well with Sophie. (3)
+
+      Sophie is bad at astronaut work. (1)
+
+      Sophie is bad at science. (1)
+
+
+      Now, let''s find the best assignment.
+
+
+      Option 1: Sophie as astronaut (1) + Eliza working in science (1) + Manuel working
+      in science (3) + Eliza and Manuel work well together (3) = 8
+
+      Option 2: Eliza as astronaut (3) + Manuel working in science (3) + Sophie working
+      in science (1) + Manuel and Sophie work well together (3) = 10
+
+      Option 3: Manuel as astronaut (1) + Eliza working in science (1) + Sophie working
+      in science (1) + Eliza and Sophie work badly together (1) = 4
+
+
+      So, from this, we can see Option 2 has the maximum score.
+
+
+      ANSWER: 2
+
+      '
+  - narrative: "In the heart of our burgeoning online enterprise, amidst a flurry\
+      \ of decisions and role allocations, three distinct personalities emerged: Robert,\
+      \ Emily, and Noah. Their potential paths were twofold: the intricate art of\
+      \ website designing or the meticulous task of managing products. The office\
+      \ hummed with the suspense of their impending assignments.\n\nEmily, with her\
+      \ bright eyes and persistent nature, had a past speckled with the world of commerce.\
+      \ She spent countless hours helping manage and organize inventory for her family's\
+      \ humble grocery store. Her track record wasn't flawless; there were minor hiccups,\
+      \ like the occasional mix-up in units leading to inventory discrepancies. Mistakes\
+      \ aside, Emily clearly found her feet in the realm of product management. It\
+      \ was here that she spoke eloquently and confidently, whereas the twisted maze\
+      \ of web development jargon always seemed to trip her. The memory of her washed-out\
+      \ stint in a web design course in college served as a bitter reminder of this\
+      \ fact.\n\nRobert, the epitome of a self-starter, was not an easy figure to\
+      \ miss. He was quick to organise, to delegate, although he was not yet in a\
+      \ position of leadership. This assertiveness didn't sit well with Noah, who\
+      \ turned argumentative on Robert's attempts to delegate tasks. His lack of trust\
+      \ in Emily's decisions, often overriding them without consultation, caused tension\
+      \ between them. Robert's life outside the office was a testament to his organisation\
+      \ skills. His book collection, extensive and sorted into categories, was a marvel\
+      \ in itself. Robert had hands-on experience with website development, creating\
+      \ a website for his college's tech group and spending free time diving deeper\
+      \ into the world of design. His persistence and drive were known throughout\
+      \ his previous employer, where he managed project resources effectively.\n\n\
+      Then there was Noah, the wildcard in the mix. He was usually found bouncing\
+      \ off ideas with Emily during product discussions, constantly supporting her\
+      \ strategies. But his past in managing was limited to when he ran a small lemonade\
+      \ stand in his childhood. Noah's challenge was his ability to organize; tasks\
+      \ often seemed to slip through the cracks of his memory. His temperament was\
+      \ a puzzle too, as he easily got frustrated, often quitting design tasks. His\
+      \ attempts to grasp website design ended in frustration, as the basics of coding\
+      \ seemed alien to him.\n\nBracing myself as I looked over the busy workspace,\
+      \ I knew this decision wouldn't be easy. The still and silent air was filled\
+      \ with anticipation as my gaze alternated between Robert, Emily, and Noah. The\
+      \ next decision would color their experience in this startup, and I was at the\
+      \ helm of it.\n    \n"
+    question: Given the story, how would you uniquely allocate each person to make
+      sure both tasks are accomplished efficiently?
+    choices:
+    - 'Website Designing: Robert, Managing Products: Emily and Noah'
+    - 'Website Designing: Noah, Managing Products: Emily and Robert'
+    - 'Website Designing: Emily, Managing Products: Noah and Robert'
+    reasoning: 'Let''s solve this by thinking step-by-step. First, we will figure
+      out each person''s skill level for each task. Then, we can measure how well
+      they all work together in pairs. From this, we can find the most efficient assignment
+      that maximizes the scores.
+
+
+      Let''s start with Emily. Emily clearly finds her feet in product management
+      and speaks eloquently about it, but she sometimes makes mistakes, so let''s
+      assume her product management skill level is 2. However, she washed out of a
+      web design course and web development jargon trips her up, so let''s assume
+      her website designing skill level is 1.
+
+
+      Now, let''s look at Robert. Robert has hands-on experience with website development
+      and created a website for his college''s tech group, so let''s assume his website
+      designing skill level is 3. He also managed project resources effectively and
+      has excellent organisation skills, so let''s assume his product management skill
+      level is 3.
+
+
+      Finally, let''s look at Noah. Noah easily gets frustrated and quits design tasks,
+      and coding basics seem alien to him, so let''s assume his website designing
+      skill level is 1. His managing experience is limited to a childhood lemonade
+      stand and tasks slip through his memory, so let''s assume his product management
+      skill level is 1.
+
+
+      Now, let''s look at the relationships and how people work together.
+
+
+      Robert and Noah don''t get along well; Noah turns argumentative on Robert''s
+      attempts to delegate tasks, so let''s assume their ability to work together
+      is 1.
+
+
+      Robert and Emily have tension between them; Robert doesn''t trust Emily''s decisions
+      and often overrides them without consultation, so let''s assume their ability
+      to work together is 1.
+
+
+      Emily and Noah work well together; they bounce off ideas during product discussions
+      and Noah constantly supports Emily''s strategies, so let''s assume their ability
+      to work together is 3.
+
+
+      Let''s summarize and figure out the best assignment.
+
+
+      Emily is okay with product management. (2)
+
+      Emily is bad at website designing. (1)
+
+      Emily works well with Noah. (3)
+
+      Emily does not work well with Robert. (1)
+
+      Robert is great at website designing. (3)
+
+      Robert is great at product management. (3)
+
+      Robert does not work well with Noah. (1)
+
+      Noah is bad at website designing. (1)
+
+      Noah is bad at product management. (1)
+
+
+      Now, let''s find the best assignment.
+
+
+      Option 1: Robert as website designer (3) + Emily working in product management
+      (2) + Noah working in product management (1) + Emily and Noah work well together
+      (3) = 9
+
+      Option 2: Noah as website designer (1) + Emily working in product management
+      (2) + Robert working in product management (3) + Emily and Robert work badly
+      together (1) = 5
+
+      Option 3: Emily as website designer (1) + Noah working in product management
+      (1) + Robert working in product management (3) + Noah and Robert work badly
+      together (1) = 4
+
+
+      So, from this, we can see Option 1 has the maximum score.
+
+
+      ANSWER: 1'
+test_split: team_allocation

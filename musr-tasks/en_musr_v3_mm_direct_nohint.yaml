@@ -1,0 +1,506 @@
+task: en_musr_v3_mm_direct_nohint
+dataset_path: TAUR-Lab/MuSR
+description: 'You are a helpful assistant that will answer the questions given by
+  the user.
+
+
+  Here is an example of solving the task:
+
+
+  '
+doc_to_text: !function 'utils.doc_to_text_mm_direct_nohint'
+doc_to_target: !function 'utils.doc_to_target'
+output_type: generate_until
+generation_kwargs:
+  do_sample: false
+  until:
+  - 'Q:'
+  - </s>
+  - <|im_end|>
+  - '
+
+
+
+    '
+process_results: !function 'utils.process_results'
+metric_list:
+- metric: acc
+  aggregation: mean
+num_fewshot: 3
+fewshot_delimiter: '
+
+
+
+  '
+fewshot_config:
+  sampler: first_n
+  samples:
+  - narrative: 'In the smoke-filled haze of a thriving jazz club, Alice met her explosive
+      end, leaving Detective Winston to sift through the suspects: Eugene, the shy
+      pianist, and Gabrielle, the sassy club singer.
+
+
+      While seated at his desk at the precinct, Winston received a phone call from
+      a certain observant local bartender, tipping off the police about a harsh row
+      peaking in a nearby jazz club. He signaled to his partner as they promptly dispatched
+      to the scene, already ringing with sirens and a restless crowd.
+
+
+      With the police line restraining the horde, the jazz club was undergoing a full
+      round-up as Winston approached the informative bartender. The bartender was
+      engrossed in his account to the officers about a raucous, punch throwing fight
+      Eugene was part of, to his best recollection. Winston remembered Eugene, a jazz
+      fanatic—lurking around the jazz corners more often than anyone else could recount.
+
+
+      In the heart of the upheaval, lay a woman sprawled on the floor, later identified
+      as Alice, a frequent face at the jazz scene and a financial analyst deeply engrossed
+      in financial transactions. In public, Alice had made her concerns known about
+      her discovery of fraudulent transactions at the bank, promising to report the
+      same to the authorities. Eugene, remembered conspicuously for being a bank teller
+      at the same bank Alice worked at, suddenly seemed closely linked.
+
+
+      Eugene’s arrest was far from hushed, with the local news broadcasting the progressing
+      drama live, catching sight of Eugene curtailed in handcuffs. Concurrently, it
+      was ascertained—Eugene was a member of the jazz club. This evidence backed by
+      a jazz club membership card retrieved from his wallet during the arrest.
+
+
+      Just a few steps away, he noticed a man in a suit, the bouncer, a calm figure
+      amid the bedlam. In their conversation, the bouncer corroborated that he had
+      indeed seen Eugene involved in a heated scuffle, landing a few punches. The
+      whisperings were starting to gain momentum, since Eugene was believed to be
+      on the losing end of a lawsuit—a battle courtesy of Alice charging Eugene with
+      the financial fraud she had publicly vowed to expose.
+
+
+      Eugene was known for his frequent presence at the jazz club and on top of that,
+      was an actual member. Therefore, it was hardly a leap to presume Alice meeting
+      her untimely end at the club was no mere happenstance. The jazz club, despite
+      its dim lights and pulsating music, was a public place easily accessible to
+      all, including potential suspects like Eugene and, sadly, the ill-starred Alice.
+
+
+      Det. Winston knew he was now tasked with a cryptic puzzle. A bank teller, embroiled
+      in suspected fraud and a lawsuit, a jazz club murder scene and a local financial
+      analyst—all woven into a ghastly murder mystery. He sighed in distaste as Eugene
+      was escorted away—a man still oblivious to the chain of events waiting for him.
+      But Winston knew, the night had only just begun for him.
+
+
+      Winston stared down at the crumpled microphone on the floor. He picked it up
+      gingerly, turning it in his hand. The club was in disarray, debris scattered
+      like confetti. The lab boys were still picking pieces of the grenade apart.
+
+
+      "Gabrielle''s microphone," the coroner confirmed, barely looking up from his
+      task.
+
+
+      "Give him the once-over for evidence," Winston said, handing the microphone
+      to a nearby officer.
+
+
+      Leaving the club behind him, Winston sighed heavily. The world of jazz had taken
+      a dark turn that night. Alice, the acclaimed critic with her sarcastic wit and
+      keen critical eye, had been last seen alive here. Her purse lay in the club
+      untouched, a testament to the abruptness of the event.
+
+
+      Gabrielle had been working as a war correspondent. Winston had read her articles.
+      They were richly detailed, passionate, and highlighted the harsh reality of
+      war zones. Gabrielle hadn''t been shy about sharing her experiences or publicly
+      criticizing the military in her pieces. She boldly interviewed military personnel
+      and spent extended periods in conflict zones.
+
+
+      Alice, though, never missed a chance to pick apart Gabrielle''s articles. The
+      vitriolic snippets in Alice’s column were regular features and Gabrielle''s
+      staunch defense of her articles, her work in the jazz scene, did little against
+      Alice''s respected reputation.
+
+
+      The tension between them was palpable. Alice had been awarded a major journalist
+      award that Gabrielle had desired. This only deepened their rivalry, with Gabrielle
+      feeling overlooked for this recognition in the Jazz scene.
+
+
+      Winston cast his gaze over the club once more—a hub of pulsating rhythms now
+      eerily silent.
+
+
+      A significant part of the evening was Gabrielle''s recorded interview with Alice.
+      It played on the local radio, their professional rivalry subtly echoing under
+      their professional demeanor.
+
+
+      With a deep breath, Winston knew he had a tall task ahead. The jazz club, where
+      Alice was last seen alive was now shrouded in an eerie silence, the vibrant
+      rhythms of what used to be a lively night echoing in the abandoned stage. It
+      was up to him to piece together the missing notes and bring the symphony of
+      this unsolved case to a satisfying finale.
+
+      '
+    question: Who is the most likely murderer?
+    choices:
+    - Eugene
+    - Gabrielle
+    reasoning: 'Let''s break this down step-by-step by first deducing which of the
+      two suspects has a means, motive, and opportunity.
+
+
+      We will start with Eugene.
+
+
+      Eugene was being sued by Alice for fraudulent transactions.  The charge was
+      also very public.  Both of these facts point to Eugene having a strong motive.
+
+
+      Because Eugene has a jazz club membership, and we can deduce that the jazz club
+      membership belongs to the same club Alice was murdered in, we can assume Eugene
+      has an opportunity to commit the crime.
+
+
+      Although we know Eugene is aggressive because he was throwing punches in the
+      story, we do not know if he has access to the murder weapon.  Because he does
+      not have access to a grenade, he does not have a means.
+
+
+      Let''s review Gabrielle next.
+
+
+      Gabrielle''s purse was found at the scene of the crime, and we can then assume
+      she had the opportunity to kill Alice.
+
+
+      Because Gabrielle has been in conflict zones with military personnel, it''s
+      possible that she has access to a grenade.  We can say that Gabrielle has a
+      potential means to kill the victim.
+
+
+      Finally, it appears that Gabrielle and Alice had a rivalry over journalism,
+      which could have boiled up into physical action.  Because of this, we can say
+      that Gabrielle has a potential motive to kill the victim.
+
+
+      Now, reviewing the evidence, we see that:
+
+
+      Eugene has a motive and opportunity but no means.
+
+      Gabrielle has a motive, means, and opportunity.
+
+
+      Therefore, Gabrielle is the most likely murderer.
+
+
+      ANSWER: 2
+
+      '
+  - narrative: "In the world of wrestling, body slams are expected, but nobody expected\
+      \ a fatal blow from a plank of wood; Detective Winston must untangle the twisted\
+      \ truth between suspects Deborah and Jacqueline in the brutal murder of Jesse.\n\
+      \nWinston scrolled through the log of police radio communications from the day\
+      \ Jesse was killed. \"Officer Deborah on duty,\" he read aloud from the call\
+      \ log, confirming her attendance at the security detail of a high-risk wrestling\
+      \ match.\n\nAs Winston footed the long hallway of the downtown police precinct,\
+      \ he found himself outside the gym, Deborah's training ground. This wasn't a\
+      \ surprise – she was known for her physically demanding routine, a requirement\
+      \ of her job as a police officer. \"You working out again, Deborah?\" he asked.\n\
+      \n\"I believe in physical fitness, detective,\" she said, sweat-dew glinting\
+      \ off her brow as she worked with a wooden plank. A plethora of training weaponry\
+      \ lined the walls - showing the extensive and varied training she underwent\
+      \ for close-quarters combat.\n\n\"What's up with the plank?\" \n\"Close-quarters\
+      \ combat training. Helps with the wrestling audience lines when they get rowdy,\"\
+      \ Deborah, the dedicated officer who was chosen for security detail due to her\
+      \ excellent record,  said while setting the plank back onto the training equipment\
+      \ rack. \"Also handy for those occasions when I have to break down doors during\
+      \ a raid.\" She had used one similar to this in previous drug raids, forcing\
+      \ open the doors of criminals' hideouts.\n\nWinston remembered. A week ago,\
+      \ Deborah chased a resisting criminal down three blocks. She had quite a record\
+      \ for single-handedly restraining criminals. There was a severe reprimand for\
+      \ a botched-up drug raid- a cover up she was involved in- somewhere in her past.\
+      \ His eyes darted to keys on her desk, engraved with the wrestling federation's\
+      \ logo. Clearly, these were her keys to the high-security wrestling ring building,\
+      \ which was always kept under lock and key outside of event hours.\n\nSwitching\
+      \ topics, Winston asked, \"Did you know Jesse?\" A cloud passed over Deborah's\
+      \ features. \"Knew him, yes. Warned him too. Pursuing drugs crime wasn't his\
+      \ job. He found out about the cover-up... a case I was involved in.\"\n\nAn\
+      \ oversight, Winston mused to himself. Jesse knew something he shouldn't have\
+      \ – he had definitive evidence connecting Deborah to the drug case, and he understood\
+      \ her illicit activities as well. The audio tape of his phone call stated clear\
+      \ intention. He was exposing her, and was going to the police.\n\n\"Busy day,\
+      \ wasn't it? The day Jesse died,\" Winston said. \"You were on duty.\" She nodded,\
+      \ \"Yes, the wrestling event was on: a high-risk match that necessitated police\
+      \ presence. I was stationed there because of my impressive track record.\"\n\
+      \n\"So, Jesse was killed while you were at work?\" \n\"Yes. Simultaneously,\
+      \ I was caught up in a raid,\" Deborah retorted, almost thoughtfully. She showed\
+      \ him the event schedule. Deborah was officially tasked with security, her name\
+      \ clearly listed.\n\n\"What's this about the illicit activities Jesse talked\
+      \ about?\" he asked. Deborah frowned. \"I was involved in a drug crime case,\
+      \ yes. But that was in the line of duty, not something any officer would brag\
+      \ about.\"\n\n\"Jesse found evidence about that case. He overheard you discussing\
+      \ it with a colleague.\" \nHer face darkened, but she remained silent. Winston\
+      \ excused himself.\n\nA flurry of thoughts whirled around Winston's head as\
+      \ he paced back to his car. A wrestling ring. An illicit drug case. Officer\
+      \ Deborah. Deborah's keys. Jesse dead in a locked wrestling ring.\n\nWinston\
+      \ arrived at the wrestling ring, the lifeless body of Jesse hastily removed\
+      \ to make it ready for the performance scheduled that day. He had barely started\
+      \ examining the scene when a tour group led by a woman named Jacqueline swept\
+      \ in. \n\n\"Stand back, everyone. This is an active crime scene.\" Winston announced\
+      \ to the approaching group.\n\n\"Sorry, Detective. I wanted to show my tour\
+      \ group the match today. It's one of the many popular local events we promote\
+      \ during our tour.\" Jacqueline was apologetic, unfamiliar with the macabre\
+      \ curiosity of passersby.\n\n\"Here we have the wrestling ring where our own\
+      \ local celebrity, Jesse, was set to fight in a match today.\" Her practiced\
+      \ tour guide's voice echoed in the sudden silence, trying to pull things back\
+      \ to the professional and casual tone she usually maintained during her tours.\n\
+      \n\"But instead, he became a victim in a much more sinister sort of match.\"\
+      \ His words were met with sympathetic gasps from the tour group. \n\nAs the\
+      \ touring group moved on to the next spot, Jacqueline revealed to Winston that\
+      \ she had found a sophisticated new business plan for a tour company in Jesse's\
+      \ bag. Raising her eyebrows in concern, Jacqueline nodded her head gravely.\
+      \ She then looked at Winston, \"Linda and Jesse were quite close.\"\n\nBeyond\
+      \ the company walls, Jacqueline and Linda had been childhood pals. Jacqueline\
+      \ often noticed Linda and Jesse always together at work. They were whispering\
+      \ about future plans during her tour. This added a startling turn to the mystery\
+      \ at hand.\n\nLater in the day, Jacqueline's personal life was exposed. Linda,\
+      \ her best friend, had been skipping their usual coffee catch-ups at the local\
+      \ café to spend time with Jesse. Jesse was exceptionally friendly towards Linda.\n\
+      \nBack to the office, another fact came to light - Jacqueline had a habit of\
+      \ reading newspapers, a fact evident from pieces of an old newspaper that the\
+      \ guard found on Jacqueline's desk. Jacqueline's office was always the last\
+      \ to be cleaned, a fact reported both by the cleaning crew and the office manager.\
+      \ It seemed Jacqueline was always the last to leave the office. \n\nA public\
+      \ record from the town showed that Jacqueline had attended a meeting about recent\
+      \ spike and concerns in local crime rates. Jacqueline's curiosity about crime\
+      \ was also mentioned casually by the café owner during Winston's regular visits.\
+      \ \n\nFew more loose threads, but every link heightened the mystery of Jacqueline's\
+      \ involvement in Jesse's suspicious death. Would it turn out to be mere coincidence\
+      \ or a calculated move disguised as an innocent routine of a hardworking businesswoman?\
+      \ Only time could tell.\n"
+    question: Who is the most likely murderer?
+    choices:
+    - Deborah
+    - Jacqueline
+    reasoning: 'Let''s break this down step-by-step by first deducing which of the
+      two suspects has a means, motive, and opportunity.
+
+
+      We will start with Deborah.
+
+
+      Deborah had a strong motive to kill Jesse. Jesse had discovered evidence of
+      her involvement in a drug case cover-up and was planning to expose her to the
+      police. The audio tape confirmed his intention to report her illicit activities,
+      which would destroy her career and reputation as a police officer.
+
+
+      Deborah clearly had access to the means. She was trained in close-quarters combat
+      and regularly used wooden planks in her training routine. The story specifically
+      mentions her working with a wooden plank and using similar ones in drug raids
+      to break down doors. This establishes her familiarity with the murder weapon.
+
+
+      Deborah also had opportunity to commit the crime. She possessed keys to the
+      high-security wrestling ring building, as evidenced by the keys with the wrestling
+      federation logo on her desk. The wrestling ring was kept locked outside of event
+      hours, but her keys provided her access to the crime scene.
+
+
+      Let''s review Jacqueline next.
+
+
+      Jacqueline appears to have a potential motive related to Jesse''s relationship
+      with Linda. Her best friend Linda had been spending time with Jesse instead
+      of maintaining their usual coffee meetings, which could create jealousy. Additionally,
+      Jesse had a business plan that might threaten her tour company.
+
+
+      However, Jacqueline''s access to means is unclear. While she shows interest
+      in crime (attending crime meetings, reading newspapers), there''s no evidence
+      she had access to a wooden plank or training with such weapons.
+
+
+      Jacqueline''s opportunity is also questionable. As a tour guide, she may have
+      general access to public areas, but there''s no evidence she had keys or specific
+      access to the locked wrestling ring building where the murder occurred.
+
+
+      Now, reviewing the evidence, we see that:
+
+
+      Deborah has motive, means, and opportunity clearly established.
+
+      Jacqueline has potential motive but lacks clear means and opportunity.
+
+
+      Therefore, Deborah is the most likely murderer.
+
+
+      ANSWER: 1
+
+      '
+  - narrative: "In the secretive world of an underground bunker, Holly's life ends\
+      \ with a poisoned cocktail, leaving Detective Winston with only two suspects:\
+      \ Zachary and Timothy.\n\nDense clouds hung low in the sky as Winston entered\
+      \ the precinct, working late on the case of the murdered woman, Holly. Rain\
+      \ covered the windows, muffling the noise of the city outside. Winston placed\
+      \ the scattered papers on his desk, a fresh coffee in his hand.\n\nWinston's\
+      \ train of thought was derailed by a knock on his office door. \"Come in,\"\
+      \ he barked, sipping from his coffee cup with a weary gaze. Timothy, a pastry\
+      \ chef with a notably bright disposition despite the recent events, entered\
+      \ gingerly.\n\n\"Detective, heard you wanted to chat?\" Timothy inquired quietly,\
+      \ a look of unease evident on his face.\n\n\"Correct, Timothy. Why don't you\
+      \ have a seat?\" Winston motioned towards a metal chair across from his desk.\n\
+      \nTimothy was notorious in their small town for his pastries. He'd win the annual\
+      \ bake-off every year since he'd moved in. There was something different about\
+      \ his pastries, a distinctive flavor that nobody could imitate. However, after\
+      \ the missing person released a similar pastry, his sales significantly dwindled,\
+      \ shaking his monopoly of baked goods in the community.\n\n\"You're quite the\
+      \ pastry chef, nobody else seems to make those pastries quite like you do,\"\
+      \ Winston gave a tight nod, setting down his coffee cup. Winston remembered\
+      \ seeing Timothy nervously fiddling with his keys at the Bunker's party just\
+      \ before Holly's disappearance.\n\n\"Yeah, that's important to me. Feels like\
+      \ that's the one thing people really know me for. Although, I did have a bitter\
+      \ quarrel with someone regarding the exclusive recipe, but let me assure you\
+      \ sir, that was just sheer professional rivalry,\" Timothy's voice trembled\
+      \ slightly.\n\n\"Ah yes, the person who copied your recipe, that did become\
+      \ quite the town scandal.\" The detective's pen hovered over his notebook, not\
+      \ missing a beat.\n\n\"Yes, they launched the exact same pastry just a week\
+      \ after I disclosed it to my closed group,\" Timothy admitted, visibly incensed.\
+      \ \n\nShifting back in his chair, Winston picked up a keychain that was lain\
+      \ out on the desk, an emblem of Timothy's pastry shop embossed on the key tag.\
+      \ \"I was told you seemed to misplace your keys the night Holly went AWOL,\"\
+      \ Winston narrowed his eyes at Timothy.\n\n\"Yeah, it was quite an inconvenience.\
+      \ I can't seem to find it anywhere,\" Timothy confirmed.\n\n\"Two boys found\
+      \ this near the playground, seem to recall seeing you in the park,\" Winston\
+      \ showed Timothy the keychain.\n\n\"I often cross the park to reach the bunker.\
+      \ Must have dropped it while I was rushing. The bunker, you see, gets a lot\
+      \ of customers because of my pastries.\"\n\n\"So, you seem very dedicated to\
+      \ the bunker. Were you working in the kitchen that night?\" Winston inquired.\n\
+      \n\"Yes, I was preparing drinks. The bunker's kitchen is stocked with various\
+      \ unique ingredients. In my kitchen, there also exists a collection of exotic\
+      \ ingredients I mix and match to create my pastries and drinks.\" Timothy clarified.\n\
+      \n\"Yes, indeed, Bunker serves as a gathering point for the townsfolk. Holly\
+      \ loved the place. She was always the life of the party, even though she loved\
+      \ to ridicule my pastries, right in front of everyone. I remember her pushing\
+      \ me away at the party and laughing off my constant attention.\" Timothy elaborated.\n\
+      \n\"Such a stark contrast, considering she was your fav. Holly didn't reciprocate,\
+      \ huh?\" Winston commented, referring to the unopened love letters from Timothy\
+      \ to Holly that were found among Holly's things. Holly never replied to those\
+      \ letters.\n\n\"She enjoyed the attention, novelist at her core I suppose. I\
+      \ do remember her having a partner who wasn't me, though.\" Timothy remembered\
+      \ aloud.\n\n\"Poor lass had quite a night, wouldn't you say? She was seen sipping\
+      \ your cocktail. Timothy was known for making unique flavored drinks too.\"\
+      \ Winston picked up the crime scene photos from his coffee-stained desk. \n\n\
+      Timothy's hands balled into fists before he forced them to relax, \"Yes, the\
+      \ poison...\" He trailed off, looking out Winston's rain-streaked window.\n\n\
+      \"The autopsy states that it was ingested.\" Winston dangled Holly's forensic\
+      \ report in between them.\n\nNodding solemnly, Timothy rose, clearly uncomfortable\
+      \ with the direction of their conversation, \"Is there anything else I can assist\
+      \ you with, Detective?\" he asked, making for the door.\n\nHis question was\
+      \ met by the grating creak of his chair as Winston rose too, \"Just holler if\
+      \ there is anything else that fumbles upon your memory, Timothy.\"\n\nAnd with\
+      \ that, Timothy exited the room, leaving Winston with his thoughts, his coffee,\
+      \ and an unsolved murder mystery.\n\nWinston was perched on his desk, strumming\
+      \ his pen against his papers. His mind replayed the scene of the crime over\
+      \ and over -- an underground bunker. It wasn't a common choice for a murder\
+      \ scene, with a thick metal door that only opened to a specific code, known\
+      \ only to Holly and Zachary. It was an isolated, impenetrable box with no windows\
+      \ or additional entries. Just a private hellhole. \n\nHis suspect was a man\
+      \ named Zachary. There was an aura of brain over brawn about him. He had a scholarship\
+      \ to a leading university's chemistry department, with countless published articles\
+      \ about chemical toxicity. He even worked on a project related to poison while\
+      \ working under his old boss. He was also seen working late hours in the library,\
+      \ studying relentlessly. Typical of a diligent scholar. \n\nShuffling the papers\
+      \ around, Winston found the CCTV records. Zachary was seen entering the bunker\
+      \ with Holly, and hours later, he reappeared—alone. It was damning, but he needed\
+      \ to dig deeper. \n\nHolly used their old friendship and Zachary's trust to\
+      \ her advantage. Once, at a work gathering, she publicly insulted him, making\
+      \ a spectacle of him in front of their peers. Rumors started, labeling him as\
+      \ unreliable. Another piece of evidence was a message Holly had sent to a friend,\
+      \ found on her phone, stating she'll be spending the day with Zachary in the\
+      \ bunker. Interestingly, no one else in their social circle was mentioned in\
+      \ the message, indicating Zachary as her only guest.\n\nBeneath all that, however,\
+      \ there was another big betrayal. Holly had left Zachary stranded during a critical\
+      \ business deal. After the business sabotage, which Winston received confirmation\
+      \ from Zachary's friends, she had the audacity to advise Zachary's clients to\
+      \ drop him. These acts might have been Holly's way of declaring war in the business\
+      \ world, but they had a personal touch, carrying the sting of a former friend's\
+      \ spite.\n\nHolly's home was a reflection of her lifestyle—small, minimalist,\
+      \ strangely tidy. She was a creature of habit, that much was clear. Zachary\
+      \ was seen in her home frequently, cordially attending the frequent dinners\
+      \ she hosted, despite her known betrayal. His trustworthiness was his strength\
+      \ and weakness.\n\nLooking at all the pieces of the puzzle, Winston decided\
+      \ to have a chat with Zachary. He needed to know more about their times together,\
+      \ about the bunker, about Holly. As he stood up and left his office to meet\
+      \ with Zachary, he caught one more glance at the CCTV records. Zachary entering\
+      \ the bunker with Holly, smiling. Zachary exiting alone, grim. The perfect metaphor\
+      \ for their fallen friendship.\n"
+    question: Who is the most likely murderer?
+    choices:
+    - Zachary
+    - Timothy
+    reasoning: 'Let''s break this down step-by-step by first deducing which of the
+      two suspects has a means, motive, and opportunity.
+
+
+      We will start with Timothy.
+
+
+      Timothy had a motive based on unrequited love. Holly rejected his romantic advances,
+      never replied to his love letters, and publicly ridiculed his pastries while
+      pushing him away at parties. This rejection and humiliation could create a strong
+      emotional motive for murder.
+
+
+      Timothy had access to the means. He was preparing drinks in the bunker''s kitchen
+      that night, which was "stocked with various unique ingredients." He also had
+      "a collection of exotic ingredients" in his own kitchen for creating pastries
+      and drinks. Holly was seen drinking his cocktail, establishing a clear delivery
+      method for poison.
+
+
+      However, Timothy''s opportunity is questionable. While he was at the bunker
+      that night, there''s no evidence he had access to the underground bunker where
+      the murder occurred. The bunker had "a thick metal door that only opened to
+      a specific code, known only to Holly and Zachary."
+
+
+      Let''s review Zachary next.
+
+
+      Zachary had a strong motive. Holly had betrayed him multiple times: publicly
+      insulting him at work gatherings, sabotaging his business deals, and advising
+      his clients to drop him. These repeated betrayals from a former friend would
+      create significant resentment and anger.
+
+
+      Zachary clearly had the means. He had extensive knowledge of chemistry and toxicity
+      through his university scholarship in chemistry, published articles about chemical
+      toxicity, and work on poison-related projects. This expertise gave him the knowledge
+      to create and administer poison effectively.
+
+
+      Zachary had definitive opportunity. CCTV footage showed him entering the bunker
+      with Holly and exiting alone hours later. Most importantly, only Holly and Zachary
+      knew the access code to the underground bunker, making him one of only two people
+      who could access the crime scene.
+
+
+      Now, reviewing the evidence, we see that:
+
+
+      Timothy has a motive and potential means but lacks opportunity to access the
+      bunker.
+
+      Zachary has a motive, means, and clear opportunity.
+
+
+      Therefore, Zachary is the most likely murderer.
+
+
+      ANSWER: 1'
+test_split: murder_mysteries
