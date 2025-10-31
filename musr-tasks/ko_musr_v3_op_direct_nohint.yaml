@@ -1,5 +1,5 @@
 task: ko_musr_v3_op_direct_nohint
-dataset_path: thunder-research-group/Ko-MuSR
+dataset_path: thunder-research-group/SNU_Ko-MuSR
 description: '당신은 사용자가 제시한 질문에 답변하는 친절한 도우미입니다.
 
 
